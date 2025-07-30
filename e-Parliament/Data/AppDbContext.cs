@@ -10,12 +10,18 @@ namespace e_Parliament.DbContextApp
 {
     internal class AppDbContext : DbContext
     {
+        public string connectionString { get; }
         public DbSet<AccountType> accountTypes { get; set; }
         public DbSet<Users> users { get; set; }
 
+        public AppDbContext()
+        {
+            connectionString = "Host=localhost;Database=e_Parliament;Username=postgres;Password=admin";
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Database=e_Parliament;Username=postgres;Password=admin");
+            optionsBuilder.UseNpgsql(connectionString);
             //pg connection string
         }
     }

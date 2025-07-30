@@ -8,5 +8,6 @@ namespace e_Parliament.models
 {
     internal class Commission
     {
+
     }
 }

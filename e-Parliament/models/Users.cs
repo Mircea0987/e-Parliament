@@ -20,8 +20,8 @@ namespace e_Parliament.models
         public DateOnly DateOfBirth { get; set; }
         public string Country { get; set; }
         public string? PhoneNumber { get; set; }
-        public int AccountTypeId { get; set; }
-        public AccountType AccountType { get; set; }
+        public int AccountTypeId { get; set; } // foreign key to AccountType
+        public AccountType AccountType { get; set; }// navigation property to AccountType
 
 
     }

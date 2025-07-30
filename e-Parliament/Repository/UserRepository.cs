@@ -10,7 +10,7 @@ namespace e_Parliament.Repository
     internal interface UserRepository
     {
         List<Users> getAllUsers();
-        Users getUserById(int id);
+        Users getUserById(int userId);
         void addUser(Users user);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using e_Parliament.DbContextApp;
-using e_Parliament.models; // Add this using directive to reference the correct Users model
+using e_Parliament.models;
 using e_Parliament.Repository;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,14 @@ namespace e_Parliament.Services
         {
             using (_context = new AppDbContext())
             {
-                return _context.users.ToList();
+                if(_context == null)
+                {
+                    throw new Exception("No users found");
+                }
+                else
+                {
+                    return _context.users.ToList();
+                }
             }
         }
 
@@ -24,8 +31,9 @@ namespace e_Parliament.Services
         {
             using (_context = new AppDbContext())
             {
+
                 Users user = _context.users.FirstOrDefault(u => u.Id == id);
-                if(user == null)
+                if (user == null)
                 {
                     throw new Exception("User not found");
                 }
@@ -33,14 +41,24 @@ namespace e_Parliament.Services
                 {
                   return user;
                 }
+
+                
             }
         }
         public void addUser(Users user)
         {
             using(_context = new AppDbContext())
             {
-                _context.users.Add(user);
-                _context.SaveChanges();
+                if(user == null)
+                {
+                    throw new Exception("User cannot be null");
+                }
+                else
+                {
+                    _context.users.Add(user);
+                    _context.SaveChanges();
+                }
+                  
             }
         }
     }

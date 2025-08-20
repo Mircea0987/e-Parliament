@@ -16,6 +16,7 @@ namespace e_Parliament.models
         public int Id { get; set; }
         [Column("type_name")]
         public TypeNameEnum typeName { get; set; }//enum?
+
         [Column("actions")]
         public string Actions { get; set; }
         public List<Users> Users { get; set; } 

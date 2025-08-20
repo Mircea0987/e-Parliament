@@ -41,8 +41,6 @@ namespace e_Parliament.Services
                 {
                   return user;
                 }
-
-                
             }
         }
         public void addUser(Users user)

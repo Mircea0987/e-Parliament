@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace e_Parliament.models
+namespace e_Parliament.enums
 {
-    internal class ParliamentariansMember
+    public enum TypeNameEnum
     {
-
+        BasicUsers,
+        PremiumUser,
+        Admin,
     }
 }

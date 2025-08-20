@@ -16,7 +16,7 @@ namespace e_Parliament.Services
         {
             using (_context = new AppDbContext())
             {
-                if(_context == null)
+                if(_context.users == null)
                 {
                     throw new Exception("No users found");
                 }
@@ -55,7 +55,7 @@ namespace e_Parliament.Services
                 }
                 else
                 {
-                    _context.users.Add(user);
+                    _context.users.AddAsync(user);
                     _context.SaveChanges();
                 }
                   

@@ -10,7 +10,6 @@ namespace e_Parliament.models
 {
     internal class CommissionMember
     {
-        //M - M 
         [Key]
         [Column("commission_member_id")]
         public int Id { get; set; }
@@ -19,10 +18,10 @@ namespace e_Parliament.models
         public string Role { get; set; } = "";
 
         [Column("parliament_member_id")]
-        public int ParliamentMemberId { get; set; } // foreign key to ParliamentMember
+        public int ParliamentMemberId { get; set; }
 
         [Column("id_commission")]
-        public int CommissionId { get; set; } // foreign key to Commission
+        public int CommissionId { get; set; }
 
         [Column("date_start")]
         public DateTime DateStart { get; set; }

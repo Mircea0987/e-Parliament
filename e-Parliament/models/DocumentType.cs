@@ -18,6 +18,9 @@ namespace e_Parliament.models
         [Column("document_type")]
         public DocuemntTypeEnum documentType { get; set; }
 
+        [Column("file_path")]
+        public string filePath { get; set; }
+
         //Navigation property to MeetingDocument
         List<MeetingDocument> meetingDocuments { get; set; }
 

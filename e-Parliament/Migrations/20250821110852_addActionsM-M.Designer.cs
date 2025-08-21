@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using e_Parliament.DbContextApp;
@@ -11,9 +12,11 @@ using e_Parliament.DbContextApp;
 namespace e_Parliament.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250821110852_addActionsM-M")]
+    partial class addActionsMM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +34,12 @@ namespace e_Parliament.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("TypeName")
+                    b.Property<string>("Actions")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("actions");
+
+                    b.Property<string>("typeName")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("type_name");
@@ -44,37 +52,19 @@ namespace e_Parliament.Migrations
             modelBuilder.Entity("e_Parliament.models.AccountTypeAction", b =>
                 {
                     b.Property<int>("IdAccountType")
-                        .HasColumnType("integer")
-                        .HasColumnName("account_type_id");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdAction")
-                        .HasColumnType("integer")
-                        .HasColumnName("action_id");
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("AccountTypeId")
+                        .HasColumnType("integer");
 
                     b.HasKey("IdAccountType", "IdAction");
 
-                    b.HasIndex("IdAction");
+                    b.HasIndex("AccountTypeId");
 
-                    b.ToTable("account_type_actions");
-                });
-
-            modelBuilder.Entity("e_Parliament.models.Action", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("action_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("action_type");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("actions");
+                    b.ToTable("AccountTypeAction");
                 });
 
             modelBuilder.Entity("e_Parliament.models.Commission", b =>
@@ -152,11 +142,6 @@ namespace e_Parliament.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("document_type");
-
-                    b.Property<string>("filePath")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("file_path");
 
                     b.HasKey("Id");
 
@@ -245,7 +230,7 @@ namespace e_Parliament.Migrations
 
                     b.HasIndex("MeetingId");
 
-                    b.ToTable("meeting_attendances");
+                    b.ToTable("meeting_attendaces");
                 });
 
             modelBuilder.Entity("e_Parliament.models.MeetingDocument", b =>
@@ -314,7 +299,7 @@ namespace e_Parliament.Migrations
                 {
                     b.Property<int>("Id")
                         .HasColumnType("integer")
-                        .HasColumnName("parlamentar_group_id");
+                        .HasColumnName("id_parlamentar_group");
 
                     b.Property<int>("IdMembers")
                         .HasColumnType("integer")
@@ -365,7 +350,7 @@ namespace e_Parliament.Migrations
                 {
                     b.Property<int>("Id")
                         .HasColumnType("integer")
-                        .HasColumnName("parliamentarian_id");
+                        .HasColumnName("parlamentar_id");
 
                     b.Property<int>("IdCommissionMembers")
                         .HasColumnType("integer")
@@ -452,21 +437,9 @@ namespace e_Parliament.Migrations
 
             modelBuilder.Entity("e_Parliament.models.AccountTypeAction", b =>
                 {
-                    b.HasOne("e_Parliament.models.AccountType", "accountType")
+                    b.HasOne("e_Parliament.models.AccountType", null)
                         .WithMany("AccountTypeActions")
-                        .HasForeignKey("IdAccountType")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("e_Parliament.models.Action", "Action")
-                        .WithMany()
-                        .HasForeignKey("IdAction")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Action");
-
-                    b.Navigation("accountType");
+                        .HasForeignKey("AccountTypeId");
                 });
 
             modelBuilder.Entity("e_Parliament.models.Commission", b =>

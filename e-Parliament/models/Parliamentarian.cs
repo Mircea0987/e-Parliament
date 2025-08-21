@@ -21,7 +21,7 @@ namespace e_Parliament.models
         public string LastName { get; set; } = "";
 
         [Column("id_room_type")]
-        public int id_room_type { get; set; } 
+        public int RoomTypeId { get; set; }
 
         //navigation 
         public RoomType RoomType { get; set; }

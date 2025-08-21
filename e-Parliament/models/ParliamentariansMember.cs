@@ -12,18 +12,20 @@ namespace e_Parliament.models
     [PrimaryKey(nameof(Id),nameof(IdCommissionMembers))]
     internal class ParliamentariansMember
     {
-        [Column("id_parlamentar")]
+        [Column("parliamentarian_id")]
         public int Id { get; set; }
 
-        [Column("id_commission_members")]
-
+        [Column("commission_members_id")]
         public int IdCommissionMembers { get;set; }
 
         //navigation property
 
-        public CommissionMember commissionMember { get; set; }
+        [ForeignKey(nameof(IdCommissionMembers))]
+        public CommissionMember CommissionMember { get; set; }
 
-        public Parliamentarian parliamentarian { get; set; }
+        [ForeignKey(nameof(Id))]
+        public Parliamentarian Parliamentarian { get; set; }
+
 
     }
 }

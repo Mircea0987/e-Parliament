@@ -15,11 +15,12 @@ namespace e_Parliament.models
         [Column("account_type_id")]
         public int Id { get; set; }
         [Column("type_name")]
-        public TypeNameEnum typeName { get; set; }//enum?
+        public TypeNameEnum TypeName { get; set; }
 
-        [Column("actions")]
-        public string Actions { get; set; }
-        public List<Users> Users { get; set; } 
+        //navigation properties
+        public List<Users> Users { get; set; }
+
+        public List<AccountTypeAction> AccountTypeActions { get; set; }
 
 
     }

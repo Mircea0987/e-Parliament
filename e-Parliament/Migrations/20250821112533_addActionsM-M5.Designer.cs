@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using e_Parliament.DbContextApp;
@@ -11,9 +12,11 @@ using e_Parliament.DbContextApp;
 namespace e_Parliament.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250821112533_addActionsM-M5")]
+    partial class addActionsMM5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,11 +156,6 @@ namespace e_Parliament.Migrations
                         .HasColumnType("text")
                         .HasColumnName("document_type");
 
-                    b.Property<string>("filePath")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("file_path");
-
                     b.HasKey("Id");
 
                     b.HasIndex("documentType")
@@ -245,7 +243,7 @@ namespace e_Parliament.Migrations
 
                     b.HasIndex("MeetingId");
 
-                    b.ToTable("meeting_attendances");
+                    b.ToTable("meeting_attendaces");
                 });
 
             modelBuilder.Entity("e_Parliament.models.MeetingDocument", b =>
@@ -314,7 +312,7 @@ namespace e_Parliament.Migrations
                 {
                     b.Property<int>("Id")
                         .HasColumnType("integer")
-                        .HasColumnName("parlamentar_group_id");
+                        .HasColumnName("id_parlamentar_group");
 
                     b.Property<int>("IdMembers")
                         .HasColumnType("integer")
@@ -365,7 +363,7 @@ namespace e_Parliament.Migrations
                 {
                     b.Property<int>("Id")
                         .HasColumnType("integer")
-                        .HasColumnName("parliamentarian_id");
+                        .HasColumnName("parlamentar_id");
 
                     b.Property<int>("IdCommissionMembers")
                         .HasColumnType("integer")

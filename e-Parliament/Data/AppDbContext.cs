@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Action = e_Parliament.models.Action;
 
 namespace e_Parliament.DbContextApp
 {
@@ -18,14 +19,16 @@ namespace e_Parliament.DbContextApp
         public DbSet<Commission> commissions { get; set; }
         public DbSet<Meeting> meetings { get; set; }
         public DbSet<CommissionMember> commission_members { get; set; }
-        public DbSet<ParlamentarCommission> parliament_members { get; set; }
+       // public DbSet<ParlamentarCommission> parliament_members { get; set; }
         public DbSet<ParlamentarGroupMembers> parlamentar_group_members { get; set; }
         public DbSet<ParliamentariansMember> parliamentarians_members { get; set; }
         public DbSet<Parliamentarian> parliamentarians { get; set; }
         public DbSet<Legislature> legislatures { get; set; }
         public DbSet<ParlamentarGroup> parlamentar_groups { get; set; }
         public DbSet<RoomType> room_types { get; set; }
-        public DbSet<MeetingAtendace> meeting_attendaces { get; set; }
+        public DbSet<MeetingAtendace> meeting_attendances { get; set; }
+        public DbSet<Action> actions { get; set; }
+        public DbSet<AccountTypeAction> account_type_actions { get; set; }
 
         public AppDbContext()
         {
@@ -42,7 +45,7 @@ namespace e_Parliament.DbContextApp
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<AccountType>()
-           .Property(e => e.typeName)
+           .Property(e => e.TypeName)
            .HasConversion<string>();
 
             modelBuilder.Entity<DocumentType>().Property(e => e.documentType).HasConversion<string>();

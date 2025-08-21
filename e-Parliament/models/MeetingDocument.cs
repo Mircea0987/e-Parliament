@@ -18,7 +18,7 @@ namespace e_Parliament.models
         public int CommissionId { get; set; }
 
         [Column("meeting_id")]
-        public int MeetingId { get;set; }
+        public int MeetingId { get; set; }
 
         [Column("document_name")]
         public string DocumentName { get; set; } = "";
@@ -26,17 +26,14 @@ namespace e_Parliament.models
         [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.MinValue;
 
-        //file path?
-
         [Column("is_shared")]
         public bool IsShared { get; set; } = false;
 
-        // FK
         [Column("document_type_id")]
-        public int DocumentType { get; set; }
+        public int DocumentTypeId { get; set; }
 
-        // Navigation property
-        public DocumentType DocumentTypeNavigation { get; set; }
+        // Navigation properties
+        public DocumentType DocumentType { get; set; }
         public Meeting Meeting { get; set; }
 
     }
